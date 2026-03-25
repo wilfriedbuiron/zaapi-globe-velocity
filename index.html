@@ -1,1 +1,1537 @@
-test content placeholder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaapi × Globe Group — Partnership Opportunity</title>
+    <meta name="theme-color" content="#00c28e">
+
+    <!-- Fonts: Exo (Zaapi brand) + Syne for accent headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES — ZAAPI BRAND THEME
+           =========================================== */
+        :root {
+            /* Zaapi Brand Colors */
+            --zaapi-green: #00c28e;
+            --zaapi-green-dark: #00a070;
+            --zaapi-green-glow: rgba(0, 194, 142, 0.25);
+            --zaapi-green-subtle: rgba(0, 194, 142, 0.08);
+            --zaapi-mint: rgba(179, 246, 237, 0.15);
+
+            --bg-primary: #0b0f14;
+            --bg-secondary: #111820;
+            --bg-card: #161d27;
+            --bg-card-hover: #1a2230;
+
+            --text-primary: #f0f2f5;
+            --text-secondary: #8b95a5;
+            --text-muted: #5a6577;
+
+            --globe-blue: #0066cc;
+            --globe-blue-glow: rgba(0, 102, 204, 0.2);
+            --accent-coral: #ff6b6b;
+            --accent-amber: #ffb347;
+            --accent-purple: #a78bfa;
+
+            /* Typography */
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Exo', sans-serif;
+            --title-size: clamp(2rem, 5.5vw, 4.2rem);
+            --h2-size: clamp(1.4rem, 3.5vw, 2.6rem);
+            --h3-size: clamp(1rem, 2.2vw, 1.5rem);
+            --body-size: clamp(0.8rem, 1.4vw, 1.1rem);
+            --small-size: clamp(0.65rem, 1vw, 0.85rem);
+            --label-size: clamp(0.6rem, 0.9vw, 0.75rem);
+
+            /* Spacing */
+            --slide-padding: clamp(1.5rem, 4vw, 4rem);
+            --content-gap: clamp(0.75rem, 2vw, 2rem);
+            --element-gap: clamp(0.25rem, 1vw, 1rem);
+
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+        }
+
+        /* ===========================================
+           BASE RESET
+           =========================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===========================================
+           VIEWPORT FITTING: MANDATORY BASE STYLES
+           =========================================== */
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+        }
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+        }
+        .card, .container, .content-box {
+            max-width: min(90vw, 1000px);
+            max-height: min(80vh, 700px);
+        }
+        .feature-list, .bullet-list {
+            gap: clamp(0.4rem, 1vh, 1rem);
+        }
+        .feature-list li, .bullet-list li {
+            font-size: var(--body-size);
+            line-height: 1.4;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(0.5rem, 1.5vw, 1rem);
+        }
+        img, .image-container {
+            max-width: 100%;
+            max-height: min(50vh, 400px);
+            object-fit: contain;
+        }
+
+        /* Short viewports */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 3vw, 2rem);
+                --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+                --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+                --h2-size: clamp(1rem, 3vw, 1.75rem);
+            }
+        }
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+                --title-size: clamp(1.1rem, 4vw, 2rem);
+                --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+            }
+            .nav-dots, .keyboard-hint, .decorative { display: none; }
+        }
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding: clamp(0.4rem, 2vw, 1rem);
+                --title-size: clamp(1rem, 3.5vw, 1.5rem);
+                --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+                --body-size: clamp(0.65rem, 1vw, 0.85rem);
+            }
+        }
+        @media (max-width: 600px) {
+            :root { --title-size: clamp(1.25rem, 7vw, 2.5rem); }
+            .grid { grid-template-columns: 1fr; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ===========================================
+           ANIMATIONS
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.7s var(--ease-out-expo),
+                        transform 0.7s var(--ease-out-expo);
+        }
+        .slide.visible .reveal,
+        .slide.visible .reveal-left,
+        .slide.visible .reveal-right,
+        .slide.visible .reveal-scale {
+            opacity: 1;
+            transform: translateY(0) translateX(0) scale(1);
+        }
+        /* Stagger children */
+        .slide.visible .stagger > *:nth-child(1) { transition-delay: 0.08s; }
+        .slide.visible .stagger > *:nth-child(2) { transition-delay: 0.16s; }
+        .slide.visible .stagger > *:nth-child(3) { transition-delay: 0.24s; }
+        .slide.visible .stagger > *:nth-child(4) { transition-delay: 0.32s; }
+        .slide.visible .stagger > *:nth-child(5) { transition-delay: 0.40s; }
+        .slide.visible .stagger > *:nth-child(6) { transition-delay: 0.48s; }
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--zaapi-green), #00e6a8);
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.3s ease;
+        }
+
+        /* ===========================================
+           NAVIGATION DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: clamp(12px, 2vw, 24px);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 9998;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        .nav-dot.active {
+            background: var(--zaapi-green);
+            box-shadow: 0 0 8px var(--zaapi-green-glow);
+            transform: scale(1.3);
+        }
+        .nav-dot:hover {
+            background: var(--zaapi-green);
+            transform: scale(1.2);
+        }
+
+        /* ===========================================
+           SLIDE COUNTER
+           =========================================== */
+        .slide-counter {
+            position: fixed;
+            bottom: clamp(12px, 2vw, 24px);
+            right: clamp(12px, 2vw, 24px);
+            font-family: var(--font-body);
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            z-index: 9998;
+            letter-spacing: 0.05em;
+        }
+        .slide-counter .current {
+            color: var(--zaapi-green);
+            font-weight: 600;
+        }
+
+        /* ===========================================
+           BACKGROUND EFFECTS
+           =========================================== */
+        .bg-mesh {
+            background:
+                radial-gradient(ellipse at 15% 85%, var(--zaapi-green-glow) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 15%, var(--globe-blue-glow) 0%, transparent 50%),
+                var(--bg-primary);
+        }
+        .bg-mesh-green {
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(0, 194, 142, 0.15) 0%, transparent 45%),
+                radial-gradient(ellipse at 80% 20%, rgba(0, 194, 142, 0.06) 0%, transparent 50%),
+                var(--bg-primary);
+        }
+        .bg-mesh-dual {
+            background:
+                radial-gradient(ellipse at 10% 90%, var(--zaapi-green-glow) 0%, transparent 40%),
+                radial-gradient(ellipse at 90% 10%, var(--globe-blue-glow) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 194, 142, 0.05) 0%, transparent 60%),
+                var(--bg-primary);
+        }
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 194, 142, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 194, 142, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        /* ===========================================
+           SHARED ELEMENT STYLES
+           =========================================== */
+        .section-label {
+            font-family: var(--font-body);
+            font-size: var(--label-size);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--zaapi-green);
+            margin-bottom: clamp(0.5rem, 1.5vw, 1.2rem);
+        }
+        h1 {
+            font-family: var(--font-display);
+            font-size: var(--title-size);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        h2 {
+            font-family: var(--font-display);
+            font-size: var(--h2-size);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+        }
+        h3 {
+            font-family: var(--font-display);
+            font-size: var(--h3-size);
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        p, li {
+            font-size: var(--body-size);
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        .highlight {
+            color: var(--zaapi-green);
+        }
+        .highlight-blue {
+            color: var(--globe-blue);
+        }
+        .divider {
+            width: 50px;
+            height: 3px;
+            background: var(--zaapi-green);
+            border-radius: 2px;
+            margin: clamp(0.5rem, 1.5vw, 1rem) 0;
+        }
+
+        /* ===========================================
+           TITLE SLIDE
+           =========================================== */
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .title-slide .slide-content {
+            align-items: center;
+            max-width: min(90vw, 900px);
+            margin: 0 auto;
+        }
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.75rem, 2vw, 1.5rem);
+            margin-bottom: clamp(1rem, 3vw, 2.5rem);
+        }
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        .logo-divider {
+            width: 2px;
+            height: clamp(24px, 4vw, 40px);
+            background: var(--text-muted);
+            opacity: 0.4;
+        }
+        .title-subtitle {
+            font-size: clamp(0.85rem, 1.5vw, 1.15rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-top: clamp(0.5rem, 1.5vw, 1rem);
+        }
+        .title-meta {
+            margin-top: clamp(1.5rem, 3vw, 2.5rem);
+            font-size: var(--small-size);
+            color: var(--text-muted);
+        }
+
+        /* ===========================================
+           CARDS GRID
+           =========================================== */
+        .cards-grid {
+            display: grid;
+            gap: clamp(0.5rem, 1.2vw, 0.9rem);
+        }
+        .cards-grid.cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .cards-grid.cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .cards-grid.cols-4 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (min-width: 800px) {
+            .cards-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .cards-grid.cols-2,
+            .cards-grid.cols-3 { grid-template-columns: 1fr; }
+        }
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 194, 142, 0.1);
+            border-radius: 12px;
+            padding: clamp(0.8rem, 1.8vw, 1.4rem);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .info-card:hover {
+            border-color: rgba(0, 194, 142, 0.3);
+            transform: translateY(-2px);
+        }
+        .info-card .card-icon {
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            margin-bottom: clamp(0.3rem, 0.8vw, 0.6rem);
+        }
+        .info-card h3 {
+            margin-bottom: clamp(0.2rem, 0.5vw, 0.4rem);
+            color: var(--text-primary);
+            font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+        }
+        .info-card p {
+            font-size: var(--small-size);
+            line-height: 1.45;
+        }
+
+        /* ===========================================
+           STAT CARDS
+           =========================================== */
+        .stat-row {
+            display: flex;
+            gap: clamp(0.8rem, 2vw, 1.5rem);
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            flex: 1;
+            min-width: 120px;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 194, 142, 0.1);
+            border-radius: 12px;
+            padding: clamp(0.8rem, 1.5vw, 1.2rem);
+            text-align: center;
+        }
+        .stat-card .stat-value {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            color: var(--zaapi-green);
+            line-height: 1.1;
+        }
+        .stat-card .stat-label {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            margin-top: clamp(0.2rem, 0.5vw, 0.4rem);
+        }
+
+        /* ===========================================
+           CHANNEL PILLS
+           =========================================== */
+        .channel-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(0.3rem, 0.8vw, 0.5rem);
+        }
+        .channel-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: clamp(0.25rem, 0.5vw, 0.35rem) clamp(0.6rem, 1.2vw, 0.9rem);
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+        .channel-pill .ch-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        /* ===========================================
+           TWO-COLUMN LAYOUT
+           =========================================== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(1.5rem, 4vw, 3rem);
+            align-items: center;
+        }
+        @media (max-width: 700px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+
+        /* ===========================================
+           USE CASE SLIDES
+           =========================================== */
+        .use-case-number {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            color: rgba(0, 194, 142, 0.08);
+            position: absolute;
+            top: clamp(0.5rem, 2vw, 1.5rem);
+            right: clamp(1rem, 4vw, 3rem);
+            line-height: 1;
+        }
+        .use-case-tag {
+            display: inline-block;
+            background: var(--zaapi-green-subtle);
+            border: 1px solid rgba(0, 194, 142, 0.2);
+            border-radius: 6px;
+            padding: clamp(0.15rem, 0.3vw, 0.25rem) clamp(0.5rem, 1vw, 0.75rem);
+            font-size: var(--label-size);
+            font-weight: 600;
+            color: var(--zaapi-green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: clamp(0.4rem, 1vw, 0.8rem);
+        }
+        .benefit-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.3rem, 0.8vh, 0.6rem);
+        }
+        .benefit-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: var(--body-size);
+            color: var(--text-secondary);
+        }
+        .benefit-list li::before {
+            content: '→';
+            color: var(--zaapi-green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .context-box {
+            background: rgba(0, 102, 204, 0.08);
+            border-left: 3px solid var(--globe-blue);
+            border-radius: 0 8px 8px 0;
+            padding: clamp(0.5rem, 1.2vw, 0.9rem) clamp(0.7rem, 1.5vw, 1.1rem);
+            margin-top: clamp(0.4rem, 1vw, 0.8rem);
+        }
+        .context-box p {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .context-box .context-label {
+            font-size: var(--label-size);
+            font-weight: 700;
+            color: var(--globe-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        /* ===========================================
+           QUOTE / CASE STUDY
+           =========================================== */
+        .quote-block {
+            border-left: 3px solid var(--zaapi-green);
+            padding-left: clamp(0.8rem, 2vw, 1.5rem);
+            margin: clamp(0.5rem, 1.5vw, 1rem) 0;
+        }
+        .quote-block p {
+            font-style: italic;
+            font-size: var(--body-size);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        .quote-block .attribution {
+            font-style: normal;
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            margin-top: clamp(0.3rem, 0.8vw, 0.5rem);
+        }
+
+        /* ===========================================
+           TIMELINE / STEPS
+           =========================================== */
+        .steps-row {
+            display: flex;
+            gap: clamp(0.5rem, 1.5vw, 1rem);
+            align-items: stretch;
+        }
+        .step-card {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 194, 142, 0.08);
+            border-radius: 12px;
+            padding: clamp(0.7rem, 1.5vw, 1.2rem);
+            position: relative;
+        }
+        .step-card .step-num {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            color: var(--zaapi-green);
+            opacity: 0.3;
+            line-height: 1;
+        }
+        .step-card h3 {
+            font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+            color: var(--text-primary);
+            margin: clamp(0.2rem, 0.5vw, 0.4rem) 0;
+        }
+        .step-card p {
+            font-size: var(--small-size);
+        }
+        @media (max-width: 600px) {
+            .steps-row { flex-direction: column; }
+        }
+
+        /* ===========================================
+           CTA SLIDE
+           =========================================== */
+        .cta-slide {
+            text-align: center;
+        }
+        .cta-slide .slide-content {
+            align-items: center;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: var(--zaapi-green);
+            color: var(--bg-primary);
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: var(--body-size);
+            padding: clamp(0.6rem, 1.2vw, 0.9rem) clamp(1.5rem, 3vw, 2.5rem);
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: clamp(0.8rem, 2vw, 1.5rem);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--zaapi-green-glow);
+        }
+
+        /* ===========================================
+           LOGO BAR
+           =========================================== */
+        .logo-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(1rem, 2.5vw, 2rem);
+            align-items: center;
+            opacity: 0.5;
+        }
+        .logo-bar span {
+            font-family: var(--font-display);
+            font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+            font-weight: 700;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
+
+        /* ===========================================
+           INLINE EDITING
+           =========================================== */
+        .edit-hotzone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            z-index: 10000;
+            cursor: pointer;
+        }
+        .edit-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 194, 142, 0.3);
+            color: var(--zaapi-green);
+            font-size: 18px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 10001;
+        }
+        .edit-toggle.show,
+        .edit-toggle.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .edit-toggle.active {
+            background: var(--zaapi-green);
+            color: var(--bg-primary);
+        }
+        [contenteditable="true"] {
+            outline: 1px dashed rgba(0, 194, 142, 0.4);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+        [contenteditable="true"]:focus {
+            outline-color: var(--zaapi-green);
+        }
+
+        /* ===========================================
+           FLOATING PARTICLES (subtle ambient effect)
+           =========================================== */
+        .particles-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Nav Dots -->
+    <nav class="nav-dots" id="navDots"></nav>
+
+    <!-- Slide Counter -->
+    <div class="slide-counter"><span class="current" id="counterCurrent">01</span> / <span id="counterTotal">16</span></div>
+
+    <!-- Edit Mode UI -->
+    <div class="edit-hotzone" id="editHotzone"></div>
+    <button class="edit-toggle" id="editToggle" title="Edit mode (E)">✏️</button>
+
+    <!-- Ambient Particles -->
+    <canvas class="particles-canvas" id="particlesCanvas"></canvas>
+
+
+    <!-- ============================================
+         SLIDE 1: TITLE
+         ============================================ -->
+    <section class="slide bg-mesh" id="slide-1">
+        <div class="grid-overlay"></div>
+        <div class="slide-content" style="align-items: center; text-align: center;">
+            <div class="logo-row reveal">
+                <span class="logo-text" style="color: var(--zaapi-green);">zaapi</span>
+                <div class="logo-divider"></div>
+                <span class="logo-text" style="color: var(--text-secondary); font-size: clamp(1.2rem, 2.5vw, 1.8rem);">Globe Group</span>
+            </div>
+            <h1 class="reveal" style="transition-delay: 0.1s;">AI-Powered Conversations<br>at <span class="highlight">Globe Scale</span></h1>
+            <p class="title-subtitle reveal" style="transition-delay: 0.2s;">
+                A partnership opportunity to transform customer engagement across the Globe Group ecosystem
+            </p>
+            <p class="title-meta reveal" style="transition-delay: 0.3s;">
+                Presented to Velocity by 917Ventures &nbsp;·&nbsp; March 2026
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 2: AGENDA
+         ============================================ -->
+    <section class="slide bg-mesh-green" id="slide-2">
+        <div class="slide-content">
+            <div class="section-label reveal">Agenda</div>
+            <h2 class="reveal">What We'll Cover</h2>
+            <div class="divider reveal"></div>
+            <div class="steps-row stagger" style="margin-top: var(--content-gap);">
+                <div class="step-card reveal">
+                    <div class="step-num">01</div>
+                    <h3>Who is Zaapi</h3>
+                    <p>The platform, the traction, the technology behind it</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-num">02</div>
+                    <h3>Why Globe Group</h3>
+                    <p>Where our capabilities meet Globe's strategic needs</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-num">03</div>
+                    <h3>Partnership Use Cases</h3>
+                    <p>Five concrete collaboration opportunities across business units</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-num">04</div>
+                    <h3>Next Steps</h3>
+                    <p>How we move from conversation to pilot</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 3: THE PROBLEM
+         ============================================ -->
+    <section class="slide" style="background: var(--bg-primary);" id="slide-3">
+        <div class="slide-content">
+            <div class="section-label reveal">The Challenge</div>
+            <h2 class="reveal">Customer Support Is <span class="highlight">Broken</span></h2>
+            <div class="divider reveal"></div>
+            <div class="cards-grid cols-4 stagger" style="margin-top: var(--content-gap);">
+                <div class="info-card reveal">
+                    <div class="card-icon">📱</div>
+                    <h3>10+ Channels</h3>
+                    <p>Conversations scattered across WhatsApp, FB, IG, LINE, TikTok, Shopee, Lazada, email and more</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="card-icon">⏱️</div>
+                    <h3>Slow Responses</h3>
+                    <p>Customers expect instant replies — delays mean lost sales and lower satisfaction scores</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="card-icon">📈</div>
+                    <h3>Rising Costs</h3>
+                    <p>Scaling human support teams is expensive and unsustainable as message volumes grow</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="card-icon">🔍</div>
+                    <h3>No Visibility</h3>
+                    <p>No unified view of conversations, analytics, or way to measure performance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 4: THE SOLUTION
+         ============================================ -->
+    <section class="slide bg-mesh-green" id="slide-4">
+        <div class="grid-overlay"></div>
+        <div class="slide-content">
+            <div class="section-label reveal">The Solution</div>
+            <h2 class="reveal">Zaapi — The All-in-One<br><span class="highlight">Conversational AI</span> Platform</h2>
+            <p class="reveal" style="max-width: 650px; margin-top: var(--element-gap);">
+                One platform that unifies every messaging channel into a single powerful inbox — powered by AI agents that automate customer service, qualify leads, and drive sales 24/7.
+            </p>
+            <div class="channel-row reveal" style="margin-top: var(--content-gap);">
+                <span class="channel-pill"><span class="ch-dot" style="background: #25D366;"></span>WhatsApp</span>
+                <span class="channel-pill"><span class="ch-dot" style="background: #1877F2;"></span>Facebook</span>
+                <span class="channel-pill"><span class="ch-dot" style="background: #E4405F;"></span>Instagram</span>
+                <span class="channel-pill"><span class="ch-dot" style="background: #00B900;"></span>LINE</span>
+                <span class="channel-pill"><span class="ch-dot" style="background: #ff0050;"></span>TikTok</span>
+                <span class="channel-pill"><span class="ch-dot" style="background: #EE4D2D;"></span>Shopee</span>
+                <span class="channel-pill"><span class="ch-dot" style="background: #0F146D;"></span>Lazada</span>
+                <span class="channel-pill"><span class="ch-dot" style="background: #96bf48;"></span>Shopify</span>
+                <span class="channel-pill"><span class="ch-dot" style="background: #EA4335;"></span>Email</span>
+                <span class="channel-pill"><span class="ch-dot" style="background: #6366f1;"></span>Website</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 5: PLATFORM CAPABILITIES
+         ============================================ -->
+    <section class="slide" style="background: var(--bg-primary);" id="slide-5">
+        <div class="slide-content">
+            <div class="section-label reveal">Platform</div>
+            <h2 class="reveal">Everything in <span class="highlight">One Platform</span></h2>
+            <div class="divider reveal"></div>
+            <div class="cards-grid cols-3 stagger" style="margin-top: var(--content-gap);">
+                <div class="info-card reveal">
+                    <div class="card-icon">💬</div>
+                    <h3>Unified Inbox</h3>
+                    <p>All channels in one place — WhatsApp, social, marketplaces, email. Smart routing & assignment.</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="card-icon">🤖</div>
+                    <h3>AI Agent</h3>
+                    <p>24/7 autonomous agents trained on your data. Handle queries, check orders, process refunds.</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="card-icon">⚡</div>
+                    <h3>Automations</h3>
+                    <p>Visual flow builder with triggers, conditions & actions. Automate lead qualification, follow-ups & more.</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="card-icon">📊</div>
+                    <h3>Analytics</h3>
+                    <p>Real-time dashboards for conversations, agent performance, CSAT scores & AI resolution rates.</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="card-icon">📢</div>
+                    <h3>Broadcast</h3>
+                    <p>Targeted WhatsApp & LINE campaigns segmented by customer behavior, labels & purchase history.</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="card-icon">🛒</div>
+                    <h3>E-commerce</h3>
+                    <p>Native Shopee, Lazada & Shopify integrations. Order lookup, cart recovery & product recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 6: AI DIFFERENTIATOR
+         ============================================ -->
+    <section class="slide bg-mesh-green" id="slide-6">
+        <div class="grid-overlay"></div>
+        <div class="slide-content">
+            <div class="two-col">
+                <div>
+                    <div class="section-label reveal">Our Edge</div>
+                    <h2 class="reveal">Two Things No One<br>Else <span class="highlight">Does</span></h2>
+                    <div class="divider reveal"></div>
+                    <div style="margin-top: var(--content-gap);">
+                        <div class="info-card reveal" style="margin-bottom: var(--element-gap);">
+                            <h3>🏪 Marketplace Integrations</h3>
+                            <p>We're the only platform that connects Shopee, Lazada & TikTok Shop alongside social channels — critical in Southeast Asia where 70%+ of e-commerce flows through marketplaces.</p>
+                        </div>
+                        <div class="info-card reveal">
+                            <h3>🧠 90%+ AI Automation</h3>
+                            <p>Our AI agents don't just reply — they execute full workflows: checking orders, processing returns, qualifying leads, booking appointments. Up to 90%+ of tickets resolved without a human.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: var(--element-gap); align-items: center;">
+                    <div class="stat-card reveal" style="width: 100%;">
+                        <div class="stat-value">90%+</div>
+                        <div class="stat-label">AI Resolution Rate</div>
+                    </div>
+                    <div class="stat-card reveal" style="width: 100%;">
+                        <div class="stat-value">~94%</div>
+                        <div class="stat-label">Cheaper per Query vs. Human Agents</div>
+                    </div>
+                    <div class="stat-card reveal" style="width: 100%;">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Always-On Service</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 7: TRACTION & SOCIAL PROOF
+         ============================================ -->
+    <section class="slide" style="background: var(--bg-primary);" id="slide-7">
+        <div class="slide-content" style="align-items: center; text-align: center;">
+            <div class="section-label reveal">Traction</div>
+            <h2 class="reveal">Trusted by <span class="highlight">Industry Leaders</span> Worldwide</h2>
+            <div class="divider reveal" style="margin-left: auto; margin-right: auto;"></div>
+            <div class="stat-row reveal" style="margin-top: var(--content-gap); justify-content: center;">
+                <div class="stat-card">
+                    <div class="stat-value">4×</div>
+                    <div class="stat-label">YoY Revenue Growth</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$4M</div>
+                    <div class="stat-label">Seed Funding Raised</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">SEA</div>
+                    <div class="stat-label">Regional Presence</div>
+                </div>
+            </div>
+            <div class="logo-bar reveal" style="margin-top: var(--content-gap); justify-content: center;">
+                <span>Unilever</span>
+                <span>Nestlé</span>
+                <span>Colgate</span>
+                <span>LEGO</span>
+                <span>Nintendo</span>
+                <span>MAC</span>
+                <span>Razer</span>
+            </div>
+            <div class="quote-block reveal" style="margin-top: var(--content-gap); text-align: left; max-width: 700px;">
+                <p>"Zaapi's AI agents transformed our customer support operations, allowing us to scale without proportionally increasing headcount."</p>
+                <div class="attribution">— Ma. Victorina Mateo, CS Manager, Cloud Ecommerce Corp (Philippines, 200+ employees)</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 8: WHY GLOBE GROUP
+         ============================================ -->
+    <section class="slide bg-mesh-dual" id="slide-8">
+        <div class="grid-overlay"></div>
+        <div class="slide-content">
+            <div class="section-label reveal">Strategic Fit</div>
+            <h2 class="reveal">Why <span class="highlight">Zaapi</span> × <span class="highlight-blue">Globe Group</span></h2>
+            <div class="divider reveal"></div>
+            <div class="two-col" style="margin-top: var(--content-gap);">
+                <div>
+                    <div class="info-card reveal" style="border-left: 3px solid var(--zaapi-green); margin-bottom: var(--element-gap);">
+                        <h3>What Zaapi Brings</h3>
+                        <ul class="benefit-list" style="margin-top: 8px;">
+                            <li>Best-in-class AI automation (90%+ resolution)</li>
+                            <li>Unique marketplace integrations (Shopee/Lazada/TikTok)</li>
+                            <li>Proven SEA-first platform, enterprise-ready</li>
+                            <li>Rapid deployment — live in days, not months</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card reveal" style="border-left: 3px solid var(--globe-blue); margin-bottom: var(--element-gap);">
+                        <h3>What Globe Offers</h3>
+                        <ul class="benefit-list" style="margin-top: 8px;">
+                            <li>Massive SME & enterprise distribution</li>
+                            <li>Brave Connective's comms ecosystem (M360, AdSpark, Inquiro)</li>
+                            <li>Velocity's startup-to-enterprise bridge</li>
+                            <li>Philippine market depth across every industry vertical</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 9: USE CASE 1 — BRAVE CONNECTIVE RESELLER
+         ============================================ -->
+    <section class="slide" style="background: var(--bg-primary);" id="slide-9">
+        <div class="use-case-number">01</div>
+        <div class="slide-content">
+            <div class="use-case-tag reveal">Use Case 1</div>
+            <h2 class="reveal">Brave Connective<br>as <span class="highlight">Zaapi Reseller</span></h2>
+            <div class="divider reveal"></div>
+            <div class="two-col" style="margin-top: var(--content-gap);">
+                <div>
+                    <p class="reveal">Brave Connective's M360 is the leading CPaaS in the Philippines — but it doesn't offer marketplace integrations or AI-powered full automation. Zaapi fills both gaps.</p>
+                    <ul class="benefit-list reveal" style="margin-top: var(--element-gap);">
+                        <li>Resell Zaapi to M360 clients needing Shopee/Lazada/TikTok chat</li>
+                        <li>White-label or co-branded AI automation suite</li>
+                        <li>Expand Brave's portfolio into conversational commerce</li>
+                        <li>Revenue share model aligned with Globe's platform strategy</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="context-box reveal">
+                        <div class="context-label">Globe Context</div>
+                        <p>Brave Connective (formerly AdSpark) recently partnered with Plug & Play and joined Bridge Alliance — signaling aggressive expansion into regional digital ecosystems. Zaapi's marketplace AI complements rather than competes with M360's messaging infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 10: USE CASE 2 — PRE-SALES AUTOMATION
+         ============================================ -->
+    <section class="slide bg-mesh-green" id="slide-10">
+        <div class="use-case-number" style="color: rgba(0, 194, 142, 0.06);">02</div>
+        <div class="grid-overlay"></div>
+        <div class="slide-content">
+            <div class="use-case-tag reveal">Use Case 2</div>
+            <h2 class="reveal">Automating <span class="highlight">Pre-Sales</span><br>for Ayala Land & Ayala Health</h2>
+            <div class="divider reveal"></div>
+            <div class="two-col" style="margin-top: var(--content-gap);">
+                <div>
+                    <p class="reveal">Large-scale click-to-chat campaigns on Meta generate massive lead volumes — but manual qualification is slow, costly, and inconsistent. Zaapi automates this entirely.</p>
+                    <ul class="benefit-list reveal" style="margin-top: var(--element-gap);">
+                        <li>AI qualifies leads instantly via WhatsApp/Messenger</li>
+                        <li>Auto-book property viewings & medical appointments</li>
+                        <li>Filter high-intent buyers from tire-kickers at scale</li>
+                        <li>Integrate with CRM for seamless handoff to sales teams</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="context-box reveal">
+                        <div class="context-label">Why This Matters</div>
+                        <p>Ayala Land just launched "Access Ayala Land" — a digital platform across its four residential brands reaching for 50M customers by end-2026. Pre-sales volumes will be enormous. Zaapi can serve as the AI front door for every property inquiry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 11: USE CASE 3 — AYALA HOSPITALITY
+         ============================================ -->
+    <section class="slide" style="background: var(--bg-primary);" id="slide-11">
+        <div class="use-case-number">03</div>
+        <div class="slide-content">
+            <div class="use-case-tag reveal">Use Case 3</div>
+            <h2 class="reveal">Centralising Comms for<br><span class="highlight">Ayala Hospitality</span></h2>
+            <div class="divider reveal"></div>
+            <div class="two-col" style="margin-top: var(--content-gap);">
+                <div>
+                    <p class="reveal">Seda Hotels and Ayala Land Hospitality operate properties across Luzon, Visayas and Mindanao — each with its own set of social accounts, email inboxes and messaging channels.</p>
+                    <ul class="benefit-list reveal" style="margin-top: var(--element-gap);">
+                        <li>Centralise all property communications in one dashboard</li>
+                        <li>AI handles booking inquiries, check-in info & concierge FAQs</li>
+                        <li>Consistent guest experience across every Seda property</li>
+                        <li>Multilingual support (English, Filipino, Mandarin)</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="context-box reveal">
+                        <div class="context-label">Hospitality Context</div>
+                        <p>Hotel groups manage distinct FB, IG, WhatsApp, TikTok and email accounts per property. This gets chaotic fast. Zaapi already helps hospitality groups in the region unify and automate all guest communications from a single pane of glass.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 12: USE CASE 4 — GLOBE BUSINESS SME BUNDLE
+         ============================================ -->
+    <section class="slide bg-mesh-dual" id="slide-12">
+        <div class="use-case-number" style="color: rgba(0, 194, 142, 0.06);">04</div>
+        <div class="grid-overlay"></div>
+        <div class="slide-content">
+            <div class="use-case-tag reveal">Use Case 4</div>
+            <h2 class="reveal">Bundle Zaapi with<br><span class="highlight">Globe Business</span> SME Plans</h2>
+            <div class="divider reveal"></div>
+            <div class="two-col" style="margin-top: var(--content-gap);">
+                <div>
+                    <p class="reveal">Globe Business serves thousands of SMEs with broadband and connectivity plans. Adding Zaapi creates an immediate value-add that differentiates Globe's SME offering.</p>
+                    <ul class="benefit-list reveal" style="margin-top: var(--element-gap);">
+                        <li>Bundle Zaapi into GFiber Biz / SME broadband plans</li>
+                        <li>Exclusive discounts for Globe Business subscribers</li>
+                        <li>Referral fee or revenue share for Globe on conversions</li>
+                        <li>Strengthens Globe's positioning as a digital business enabler</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="context-box reveal">
+                        <div class="context-label">Distribution Power</div>
+                        <p>Globe recently launched its 2026 connectivity plans and IoT accelerator platform with Aeris. Bundling Zaapi's AI-powered customer engagement would further differentiate Globe Business from PLDT/Smart in the SME segment — adding software value on top of connectivity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 13: USE CASE 5 — INTERNAL GLOBE GROUP
+         ============================================ -->
+    <section class="slide" style="background: var(--bg-primary);" id="slide-13">
+        <div class="use-case-number">05</div>
+        <div class="slide-content">
+            <div class="use-case-tag reveal">Use Case 5</div>
+            <h2 class="reveal">Automate Globe Group's<br><span class="highlight">Own Customer Operations</span></h2>
+            <div class="divider reveal"></div>
+            <div class="two-col" style="margin-top: var(--content-gap);">
+                <div>
+                    <p class="reveal">Wherever the highest volumes of customer service enquiries exist across Globe Group — that's where Zaapi can generate millions in savings per year.</p>
+                    <ul class="benefit-list reveal" style="margin-top: var(--element-gap);">
+                        <li>Deploy across socials, email, website & soon mobile apps</li>
+                        <li>AI resolves 80-90% of routine tickets instantly</li>
+                        <li>Already saving $100Ks/year for large-scale SEA clients</li>
+                        <li>At Globe's scale, annual savings could reach $millions</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="context-box reveal">
+                        <div class="context-label">Scale Opportunity</div>
+                        <p>Globe just launched its Omnichannel Cloud Contact Center with AI-powered engagement. Zaapi could complement this stack with marketplace and social channel automation — covering the conversational commerce layer that traditional contact center tools don't address.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 14: SUMMARY OF OPPORTUNITIES
+         ============================================ -->
+    <section class="slide bg-mesh-green" id="slide-14">
+        <div class="grid-overlay"></div>
+        <div class="slide-content">
+            <div class="section-label reveal">Overview</div>
+            <h2 class="reveal">Five Paths to <span class="highlight">Partnership</span></h2>
+            <div class="divider reveal"></div>
+            <div style="display: flex; flex-direction: column; gap: clamp(0.35rem, 0.8vh, 0.55rem); margin-top: var(--content-gap);" class="stagger">
+                <div class="info-card reveal" style="display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(0.6rem, 1.5vw, 1.2rem);">
+                    <span style="font-family: var(--font-display); font-weight: 800; font-size: var(--h3-size); color: var(--zaapi-green); opacity: 0.5;">01</span>
+                    <div><h3 style="font-size: var(--body-size);">Brave Connective Reseller</h3><p style="font-size: var(--small-size);">Extend M360 with marketplace AI</p></div>
+                    <span style="font-size: var(--small-size); color: var(--accent-amber); font-weight: 600;">Revenue Share</span>
+                </div>
+                <div class="info-card reveal" style="display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(0.6rem, 1.5vw, 1.2rem);">
+                    <span style="font-family: var(--font-display); font-weight: 800; font-size: var(--h3-size); color: var(--zaapi-green); opacity: 0.5;">02</span>
+                    <div><h3 style="font-size: var(--body-size);">Pre-Sales Automation</h3><p style="font-size: var(--small-size);">AI lead qualification for Ayala Land & Health</p></div>
+                    <span style="font-size: var(--small-size); color: var(--accent-coral); font-weight: 600;">Pilot → Scale</span>
+                </div>
+                <div class="info-card reveal" style="display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(0.6rem, 1.5vw, 1.2rem);">
+                    <span style="font-family: var(--font-display); font-weight: 800; font-size: var(--h3-size); color: var(--zaapi-green); opacity: 0.5;">03</span>
+                    <div><h3 style="font-size: var(--body-size);">Ayala Hospitality</h3><p style="font-size: var(--small-size);">Centralise comms across Seda properties</p></div>
+                    <span style="font-size: var(--small-size); color: var(--accent-purple); font-weight: 600;">Deployment</span>
+                </div>
+                <div class="info-card reveal" style="display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(0.6rem, 1.5vw, 1.2rem);">
+                    <span style="font-family: var(--font-display); font-weight: 800; font-size: var(--h3-size); color: var(--zaapi-green); opacity: 0.5;">04</span>
+                    <div><h3 style="font-size: var(--body-size);">Globe Business SME Bundle</h3><p style="font-size: var(--small-size);">Value-add for GFiber Biz subscribers</p></div>
+                    <span style="font-size: var(--small-size); color: var(--accent-amber); font-weight: 600;">Distribution</span>
+                </div>
+                <div class="info-card reveal" style="display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(0.6rem, 1.5vw, 1.2rem);">
+                    <span style="font-family: var(--font-display); font-weight: 800; font-size: var(--h3-size); color: var(--zaapi-green); opacity: 0.5;">05</span>
+                    <div><h3 style="font-size: var(--body-size);">Globe Group Internal</h3><p style="font-size: var(--small-size);">Automate customer ops, save $millions/year</p></div>
+                    <span style="font-size: var(--small-size); color: var(--accent-coral); font-weight: 600;">Cost Savings</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 15: VELOCITY FIT
+         ============================================ -->
+    <section class="slide" style="background: var(--bg-primary);" id="slide-15">
+        <div class="slide-content">
+            <div class="section-label reveal">Velocity Fit</div>
+            <h2 class="reveal">Built for the <span class="highlight">Velocity</span> Model</h2>
+            <div class="divider reveal"></div>
+            <div class="steps-row stagger" style="margin-top: var(--content-gap);">
+                <div class="step-card reveal">
+                    <div class="step-num">✓</div>
+                    <h3>Product-Market Fit</h3>
+                    <p>4× YoY revenue growth, enterprise clients (Unilever, Nestlé, LEGO), $4M seed from GFC, Partech, Flourish Ventures</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-num">✓</div>
+                    <h3>Ready to Scale in PH</h3>
+                    <p>Already serving Philippine clients (Cloud Ecommerce Corp), seeking distribution and enterprise credibility to accelerate</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-num">✓</div>
+                    <h3>Enterprise-Grade</h3>
+                    <p>End-to-end encryption, data ownership, SOC-ready security. Deploys in days with zero engineering overhead.</p>
+                </div>
+            </div>
+            <div class="context-box reveal" style="margin-top: var(--content-gap); max-width: 700px;">
+                <div class="context-label">Velocity's Mission</div>
+                <p>Velocity connects startups with traction to Globe's enterprise ecosystem for real-world pilots and telco-scale growth. Zaapi fits this profile exactly: proven product, real revenue, a clear path to enterprise partnerships across multiple Globe business units.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SLIDE 16: NEXT STEPS / CTA
+         ============================================ -->
+    <section class="slide bg-mesh cta-slide" id="slide-16">
+        <div class="grid-overlay"></div>
+        <div class="slide-content">
+            <div class="section-label reveal">Next Steps</div>
+            <h2 class="reveal">Let's Build This <span class="highlight">Together</span></h2>
+            <div class="divider reveal" style="margin-left: auto; margin-right: auto;"></div>
+            <div class="steps-row stagger" style="margin-top: var(--content-gap); max-width: 800px;">
+                <div class="step-card reveal" style="text-align: center;">
+                    <div class="step-num" style="opacity: 0.6;">1</div>
+                    <h3>Identify Pilot BU</h3>
+                    <p>Select highest-impact business unit for initial deployment</p>
+                </div>
+                <div class="step-card reveal" style="text-align: center;">
+                    <div class="step-num" style="opacity: 0.6;">2</div>
+                    <h3>30-Day Pilot</h3>
+                    <p>Live deployment with real data, measurable KPIs</p>
+                </div>
+                <div class="step-card reveal" style="text-align: center;">
+                    <div class="step-num" style="opacity: 0.6;">3</div>
+                    <h3>Scale Across Globe</h3>
+                    <p>Expand to additional BUs based on pilot results</p>
+                </div>
+            </div>
+            <div class="reveal" style="margin-top: var(--content-gap); transition-delay: 0.4s;">
+                <p style="color: var(--text-secondary); margin-bottom: var(--element-gap);">Wilfried Buiron &nbsp;·&nbsp; CEO &nbsp;·&nbsp; wilfried@zaapi.com</p>
+                <p style="font-size: var(--small-size); color: var(--text-muted);">zaapi.com</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===========================================
+         JAVASCRIPT: PRESENTATION CONTROLLER
+         =========================================== -->
+    <script>
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.isAnimating = false;
+                this.totalSlides = this.slides.length;
+
+                document.getElementById('counterTotal').textContent = String(this.totalSlides).padStart(2, '0');
+
+                this.setupIntersectionObserver();
+                this.setupKeyboardNav();
+                this.setupTouchNav();
+                this.setupWheelNav();
+                this.setupProgressBar();
+                this.setupNavDots();
+            }
+
+            setupIntersectionObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            const idx = Array.from(this.slides).indexOf(entry.target);
+                            if (idx !== -1) {
+                                this.currentSlide = idx;
+                                this.updateUI();
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+
+            setupKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') return;
+                    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                        e.preventDefault();
+                        this.goToSlide(this.currentSlide + 1);
+                    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                        e.preventDefault();
+                        this.goToSlide(this.currentSlide - 1);
+                    } else if (e.key === 'Home') {
+                        e.preventDefault();
+                        this.goToSlide(0);
+                    } else if (e.key === 'End') {
+                        e.preventDefault();
+                        this.goToSlide(this.totalSlides - 1);
+                    }
+                });
+            }
+
+            setupTouchNav() {
+                let startY = 0;
+                document.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; }, { passive: true });
+                document.addEventListener('touchend', (e) => {
+                    const diff = startY - e.changedTouches[0].clientY;
+                    if (Math.abs(diff) > 50) {
+                        this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+                    }
+                }, { passive: true });
+            }
+
+            setupWheelNav() {
+                let lastWheel = 0;
+                document.addEventListener('wheel', (e) => {
+                    const now = Date.now();
+                    if (now - lastWheel < 800) return;
+                    if (Math.abs(e.deltaY) > 30) {
+                        lastWheel = now;
+                        this.goToSlide(this.currentSlide + (e.deltaY > 0 ? 1 : -1));
+                    }
+                }, { passive: true });
+            }
+
+            goToSlide(index) {
+                if (index < 0 || index >= this.totalSlides || this.isAnimating) return;
+                this.isAnimating = true;
+                this.currentSlide = index;
+                this.slides[index].scrollIntoView({ behavior: 'smooth' });
+                this.updateUI();
+                setTimeout(() => { this.isAnimating = false; }, 700);
+            }
+
+            setupProgressBar() {
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                    document.getElementById('progressBar').style.width = progress + '%';
+                });
+            }
+
+            setupNavDots() {
+                const container = document.getElementById('navDots');
+                this.slides.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', `Slide ${i + 1}`);
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    container.appendChild(dot);
+                });
+            }
+
+            updateUI() {
+                document.getElementById('counterCurrent').textContent = String(this.currentSlide + 1).padStart(2, '0');
+                const dots = document.querySelectorAll('.nav-dot');
+                dots.forEach((d, i) => d.classList.toggle('active', i === this.currentSlide));
+            }
+        }
+
+        /* ===========================================
+           INLINE EDITOR
+           =========================================== */
+        class InlineEditor {
+            constructor() {
+                this.isActive = false;
+                this.editableElements = document.querySelectorAll('h1, h2, h3, p, li, .stat-value, .stat-label, .context-label, .section-label, .use-case-tag, .attribution, .title-subtitle, .title-meta, .logo-text');
+            }
+
+            toggleEditMode() {
+                this.isActive = !this.isActive;
+                const toggle = document.getElementById('editToggle');
+                toggle.classList.toggle('active', this.isActive);
+
+                this.editableElements.forEach(el => {
+                    if (this.isActive) {
+                        el.setAttribute('contenteditable', 'true');
+                    } else {
+                        el.removeAttribute('contenteditable');
+                    }
+                });
+            }
+        }
+
+        // Initialize
+        const presentation = new SlidePresentation();
+        const editor = new InlineEditor();
+
+        // Edit toggle interactions
+        const editToggle = document.getElementById('editToggle');
+        const editHotzone = document.getElementById('editHotzone');
+        let hideTimeout = null;
+
+        editToggle.addEventListener('click', () => editor.toggleEditMode());
+
+        editHotzone.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+            editToggle.classList.add('show');
+        });
+        editHotzone.addEventListener('mouseleave', () => {
+            hideTimeout = setTimeout(() => {
+                if (!editor.isActive) editToggle.classList.remove('show');
+            }, 400);
+        });
+        editToggle.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+        editToggle.addEventListener('mouseleave', () => {
+            hideTimeout = setTimeout(() => {
+                if (!editor.isActive) editToggle.classList.remove('show');
+            }, 400);
+        });
+        editHotzone.addEventListener('click', () => editor.toggleEditMode());
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'e' || e.key === 'E') && !e.target.getAttribute('contenteditable')) {
+                editor.toggleEditMode();
+            }
+        });
+
+        // Ctrl+S to save
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'zaapi-globe-velocity.html';
+                a.click();
+            }
+        });
+
+        /* ===========================================
+           AMBIENT PARTICLES
+           =========================================== */
+        (function() {
+            const canvas = document.getElementById('particlesCanvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const COUNT = 30;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            for (let i = 0; i < COUNT; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 1.5 + 0.5,
+                    dx: (Math.random() - 0.5) * 0.3,
+                    dy: (Math.random() - 0.5) * 0.3,
+                    alpha: Math.random() * 0.4 + 0.1
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.x += p.dx;
+                    p.y += p.dy;
+                    if (p.x < 0) p.x = canvas.width;
+                    if (p.x > canvas.width) p.x = 0;
+                    if (p.y < 0) p.y = canvas.height;
+                    if (p.y > canvas.height) p.y = 0;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 194, 142, ${p.alpha})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+    </script>
+</body>
+</html>
